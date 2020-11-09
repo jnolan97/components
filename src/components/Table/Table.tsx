@@ -3,6 +3,8 @@ import { ButtonVariant } from 'src/interfaces'
 
 import { Button } from '../Button'
 
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 interface Props<T> {
   tableClassName: string
   headerClassName: string
@@ -13,6 +15,7 @@ interface Props<T> {
   getID: (row: T) => string
   onRowClick?: (row: T) => void
 }
+
 
 function Table<T>(props: Props<T>) {
   const {
@@ -31,7 +34,7 @@ function Table<T>(props: Props<T>) {
       <thead className={headerClassName}>
         <tr>
           {columns.map((column) => (
-            <th key={column.key as string}>{column.label}</th>
+            <th key={column.key as string}>{column.label} <div key={column.key} onClick={() => filter()}><FontAwesomeIcon icon={faFilter}></FontAwesomeIcon></div></th>
           ))}
           {actions ? <th>{actionsHeaderText}</th> : null}
         </tr>
@@ -76,6 +79,10 @@ function Table<T>(props: Props<T>) {
   )
 
   return table
+}
+
+function filter() {
+  return console.log("filter");
 }
 
 Table.defaultProps = {
